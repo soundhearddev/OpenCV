@@ -1,5 +1,6 @@
 import cv2
-
+import webbrowser
+        
 # Initialize the webcam
 cap = cv2.VideoCapture(0)
 
@@ -23,12 +24,18 @@ while True:
         decoded_text = data
         print(f"[QR Code Detected]: {decoded_text}")
         
-        # Save to file
-        with open("qr_code_result.txt", "w", encoding="utf-8") as f:
-            f.write(decoded_text)
+        path = "templates/" + decoded_text
         
-        print("QR code saved to 'qr_code_result.txt'")
+        webbrowser.open_new_tab(path)
+        
+
+        
+
         break
+        
+
+
+
 
     # Display the camera feed
     cv2.imshow("QR Code Scanner", frame)
@@ -37,6 +44,10 @@ while True:
     if cv2.waitKey(1) & 0xFF == ord('q'):
         print("Exiting without QR code.")
         break
+
+
+
+
 
 cap.release()
 cv2.destroyAllWindows()
